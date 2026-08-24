@@ -14,14 +14,39 @@
             function calcular() {
                 var input = document.getElementsByName("texto_operacao")[0];
                 var resultado = document.getElementsByClassName("resultado")[0];
-                resultado.innerHTML = eval(input.value);
+                var expressao = input.value;
+
+                var caracteres_validos = "0123456789.+-*/";
+                var operadores = "+-/*"
+                var quantidade_operadores = 0
+                var expressao_valida = true;
+
+                for (var i = 0; i < expressao.length; i++) {
+                    var caractere = expressao[i];
+
+                    if (!caracteres_validos.includes(caractere)) {
+                        expressao_valida = false;
+                        break;
+                    }
+
+                    if (operadores.includes(carectere)) {
+                        quantidade_operadores++;
+                    }
+                }
+
+                if (expressao_valida && quantidade_operadores == 1) {
+                    resultado.innerHTML = eval(expressao)
+                } else {
+                    resultado.innerHTML = "Expressão inválida!";
+                }
+                
                 input.value = "";
             }
         </script>
 
         <style>
             body {
-                font-family: Arial, sans-serif;
+                font-family: Arial;
                 text-align: center;
                 background-color: #f7f7f7;
                 margin-top: 50px;
