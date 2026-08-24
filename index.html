@@ -1,10 +1,54 @@
 <html>
-<head>
-<title>
-É uma página
-</title>
-</head>
-<body>
-Olá
-</body>
+    <head>
+        <title>Calculadora - TDD</title>
+    </head>
+    <body>
+        <h1>Calculadora</h1>
+        <form>
+            <input type="text" name="texto_operacao">
+            <button type="button" name="button" onclick="calcular()"> Calcular </button>
+        </form>
+        <h3 class="resultado"></h3>
+
+        <script>
+            function calcular() {
+                var input = document.getElementsByName("texto_operacao")[0];
+                var resultado = document.getElementsByClassName("resultado")[0];
+                resultado.innerHTML = eval(input.value);
+                input.value = "";
+            }
+        </script>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                background-color: #f7f7f7;
+                margin-top: 50px;
+            }
+            input {
+                padding: 8px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            button {
+                padding: 9px 15px;
+                font-size: 16px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #218838;
+            }
+            h3 {
+                color: #333;
+                margin-top: 20px;
+            }
+        </style>
+    </body>
 </html>
+
