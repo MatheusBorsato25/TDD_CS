@@ -34,7 +34,11 @@ def test_calc():
     # Testes - Divisão:
     for i in range(1, 16):
         for j in range(1, 16):
-            cenarios.append((f"{i}/{j}", str(i / j)))
+            resultado_divisao: float = i / j
+            if resultado_divisao.is_integer():
+                cenarios.append((f"{i}/{j}", str(int(resultado_divisao))))
+            else:
+                cenarios.append((f"{i}/{j}", str(resultado_divisao)))
     
     cenarios.extend([
         ("2.5+2.5", "5"), ("10.5*2", "21"), 
@@ -46,15 +50,18 @@ def test_calc():
     
     total_testes = len(cenarios)
     
-    for indice, (expressao, resultado_expressao) in enumerate(cenarios, 1):
-        
-        texto_operacao.clear()
-        texto_operacao.send_keys(expressao)
-        submit_button.click()
-        
-        valor = resultado.text
-        assert str(valor) == str(resultado_expressao)
-        print(f"Sucesso: [{indice}/{total_testes}] -> {expressao} = {valor}")
+    with open("logs.txt", "w", encoding="utf-8") as arquivo_log:
+        for indice, (expressao, resultado_expressao) in enumerate(cenarios, 1):
+            
+            texto_operacao.clear()
+            texto_operacao.send_keys(expressao)
+            submit_button.click()
+            
+            valor = resultado.text
+            assert str(valor) == str(resultado_expressao)
+            linha = f"Sucesso: [{indice}/{total_testes}] -> {expressao} = {valor}"
+            print(linha)
+            arquivo_log.write(linha + "\n")
     
     teardown(driver)
     
